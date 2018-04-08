@@ -1,0 +1,16 @@
+jbBlockArrowMarkerBlackID=4000
+jbBlockArrowMarkerRedID=4001
+jbBlockArrowMarkerDarkGreenID=4002
+jbBlockArrowMarkerBrownID=4003
+jbBlockArrowMarkerDarkBlueID=4004
+jbBlockArrowMarkerPurpleID=4005
+jbBlockArrowMarkerCyanID=4006
+jbBlockArrowMarkerLightGrayID=4007
+jbBlockArrowMarkerDarkGrayID=4008
+jbBlockArrowMarkerPinkID=4009
+jbBlockArrowMarkerLimeID=4010
+jbBlockArrowMarkerYellowID=4011
+jbBlockArrowMarkerLightBlueID=4012
+jbBlockArrowMarkerMagentaID=4013
+jbBlockArrowMarkerOrangeID=4014
+jbBlockArrowMarkerWhiteID=4015
