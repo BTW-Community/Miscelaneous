@@ -24,7 +24,7 @@ public class JBCommandServerHardcoreDay extends CommandBase {
 			}
 		
 			long lastTimedOut = (JBJorgesMiscellaneous.getHardcoreDayTimedOut()==-1)?-1:FCUtilsWorld.GetOverworldTimeServerOnly()-JBJorgesMiscellaneous.getHardcoreDayTimedOut();
-			if (lastTimedOut>=600) {
+			if (lastTimedOut>=900) {
 				JBJorgesMiscellaneous.setHardcoreDayTimedOut(-1);
 			}
 			else if (lastTimedOut>=0) {
