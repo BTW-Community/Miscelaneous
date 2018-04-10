@@ -14,3 +14,6 @@ jbBlockArrowMarkerLightBlueID=4012
 jbBlockArrowMarkerMagentaID=4013
 jbBlockArrowMarkerOrangeID=4014
 jbBlockArrowMarkerWhiteID=4015
+
+// Set the following to 1 to enable the "hardcoreday" command.
+enableHardcoreDayCommand=0

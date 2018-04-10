@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
 	public static final String jbVersionString = "1.0 Orientation Sickness";
@@ -13,11 +14,14 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
 
 	private static int[] JBBlockArrowMarkerIDArray = new int[16];
+	
+	private static boolean hardcoreDayEnabled = false;
+	private static long hardcoreDayTimedOut = 0;
 
 	@Override
 	public void Initialize() {
 		FCAddOnHandler.LogMessage("Jorge's Miscellaneous Version " + jbVersionString + " Initializing...");
-
+		
 		try {
 			JBBlockArrowMarkerIDArray[0] = 4000;
 			JBBlockArrowMarkerIDArray[1] = 4001;
@@ -144,7 +148,12 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 				for (int i=0; i<=15; ++i) {
 					if (value[0].equals("jbBlockArrowMarker"+JBBlockArrowMarker.colorTextureNames[i]+"ID")) {
 						JBBlockArrowMarkerIDArray[i] = (Integer.parseInt(value[1])>0)?Integer.parseInt(value[1]):JBBlockArrowMarkerIDArray[i];
+						break;
 					}	
+				}
+				
+				if (value[0].equals("enableHardcoreDayCommand")) {
+					hardcoreDayEnabled = (Integer.parseInt(value[1])==1)?true:false;					
 				}
 			}
 
@@ -154,5 +163,17 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 			System.out.println("Failed to load Jorge's Miscellaneous config file");
 			e.printStackTrace();
 		}
+	}
+
+	public static long getHardcoreDayTimedOut() {
+		return hardcoreDayTimedOut;
+	}
+
+	public static void setHardcoreDayTimedOut(long hardcoreDayTimedOut) {
+		JBJorgesMiscellaneous.hardcoreDayTimedOut = hardcoreDayTimedOut;
+	}
+
+	public static boolean isHardcoreDayEnabled() {
+		return hardcoreDayEnabled;
 	}
 }

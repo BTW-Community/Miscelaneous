@@ -3,17 +3,17 @@ Minecraft Better Than Wolves Addon
 
 ### Installation Requirements:
 
-To install this mod you need Minecraft 1.5.2 and Better Than Wolves V4.A9 Pustules Lancing or newer installed correctly. Please check the instalation instructions for BTW before you install this addon.
+To install this mod you need Minecraft 1.5.2 and Better Than Wolves V4.AAABBBA or newer installed correctly. Please check the instalation instructions for BTW before you install this addon.
 
 ### ------------ WARNING FOR ASTROLABE ADDON USERS ------------
 If you do not use the Astrolabe addon you can skip this.
 
-If you do use the Astrolabe addon on your game and you decide to install this addon alongside it, you must update Astrolabe to  version "4.1 Synergetic Relations" or newer. If you don't, you will have compatibility problems.
+If you do use the Astrolabe addon on your game and you decide to install this addon alongside it, you must update Astrolabe to  version "4.3 Conflicting Relations" or newer. If you don't, you will have compatibility problems.
 
 ---
 
 ### ------------ IMPORTANT WARNING ------------
-Make sure you make a backup of your saves and of your minecraft before you install this addon. The addon should not have any problems, but there may be bugs I have not come across yet, and they could make Minecraft crash, and on crashing you risk losing your inventory or corrupt your world. So MAKE A BACKUP!
+Make sure you make a backup of your saves and of your minecraft before you install this addon. The addon should not have any problems, but there may be bugs I have not come across yet, and they could make Minecraft crash, and on crashing you risk losing your inventory or corrupt your world. So MAKE A BACKUP! 
 
 ---
 
@@ -21,7 +21,7 @@ Make sure you make a backup of your saves and of your minecraft before you insta
 Simply open your Minecraft.jar and drag all files from inside the JAR folder within the zip file inside it. Don't forget to delete the Meta-Inf folder, although if you already have the requirements installed and working you probably did this already.
 
 Inside the config folder is the configuration file. If you wish to use it (not required) drag the config FILE ONLY (not the folder) into your base minecraft folder.
-The file "JorgesMiscellaneousConfig.txt" defines the IDs for all the blocks and items on this addon. To fix ID conflict issues, just open the file and change the ID numbers. Be careful when doing this, as it may damage worlds already saved. Make sure you know what you are doing!
+The file "JorgesMiscellaneousConfig.txt" defines the IDs for all the blocks and items on this addon, plus allows enabling the "hardcoreday" command (default disabled). To fix ID conflict issues, just open the file and change the ID numbers. Be careful when doing this, as it may damage worlds already saved. Make sure you know what you are doing!
 
 Ps. Just wanted to thanks FlowerChild again for this fantastic mod. Minecraft is not the same without it. Thank you.
 
@@ -29,9 +29,17 @@ Ps. Just wanted to thanks FlowerChild again for this fantastic mod. Minecraft is
 To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blocks and items in your inventory or placed in the world should just disappear.\
 \-------------------------------------------------
 
-### Changelog:
+## Changelog:
 
-###  - Version 1.0
+### - Version 2.0 No It Burns
+Added "/hardcoreday", an utility command. It works only on servers or lan worlds that only have one player logged in.
+What this command does is, if you die and get a new hardcore respawn, you have the option to type this command within 40 seconds, and the day will begin anew. You can only use it for this 40 second window after respawn, and only once for hardcore respawn. This command will also only work if you are alone on the server.
+
+The time limitations are in place to prevent abuse. I chose 40 seconds on account of the server loading time. If the terrain takes longer then 40 seconds to load... tough luck.
+
+The "/hardcoreday" command is disabled by default. You can enable it by editing the configuration file. If the server has it disabled, the client config file will not allow players to use this command.
+
+### Version 1.0 Orientation Sickness
 First release.
 
 Added the Arrow Marker blocks. They can be put on the ground over a solid block, and will point to the direction the player is facing. They can be rotated by right clicking with an empty hand. They are made of stone, so you need a pickaxe to break them.
