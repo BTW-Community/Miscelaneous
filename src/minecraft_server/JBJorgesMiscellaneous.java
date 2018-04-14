@@ -1,11 +1,16 @@
 package net.minecraft.src;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+
+import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "1.0 Orientation Sickness";
+	public static final String jbVersionString = "3.0 Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
@@ -14,6 +19,24 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 
 	private static boolean hardcoreDayEnabled = false;
 	private static long hardcoreDayTimedOut = 0;
+	
+	public static Block jbBlockAstrolabe;
+	private static int jbBlockAstrolabeID = 170;
+	public static Block jbBlockProjectionLens;
+	private static int jbBlockProjectionLensID = 171;
+	
+	public static Item jbItemAstrolabeFrame;
+	private static int jbItemAstrolabeFrameID = 22522;
+	public static Item jbItemProjectionLens;
+	private static int jbItemProjectionLensID = 22219;
+	public static Item jbItemEmptyStarMap;
+	private static int jbItemEmptyStarMapID = 22220;
+	public static Item jbItemStarMap;
+	private static int jbItemStarMapID = 22221;
+	public static Item jbItemEmptyNetherMap;
+	private static int jbItemEmptyNetherMapID = 22218;
+	public static Item jbItemNetherMap;
+	private static int jbItemNetherMapID = 22217;
 	
 	@Override
 	public void Initialize() {
@@ -76,6 +99,81 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 					}
 				}
 			}
+			
+			jbBlockAstrolabe = new JBBlockAstrolabe(jbBlockAstrolabeID);
+			CreateAssociatedItemForBlock(jbBlockAstrolabe);
+
+			jbBlockProjectionLens = new JBBlockProjectionLens(jbBlockProjectionLensID);
+			CreateAssociatedItemForBlock(jbBlockProjectionLens);
+			
+			jbItemProjectionLens = new JBItemProjectionLens(jbItemProjectionLensID);
+
+			TileEntity.addMapping(JBTileEntityAstrolabe.class, "jbBlockAstrolabe");
+
+			TileEntity.addMapping(JBTileEntityLens.class, "jbBlockProjectionLens");
+			
+			jbItemStarMap = new JBItemStarMap(jbItemStarMapID);
+			jbItemStarMap.SetBuoyancy(1.0F);
+			jbItemEmptyStarMap = new JBItemEmptyStarMap(jbItemEmptyStarMapID);
+			
+			jbItemNetherMap = new JBItemNetherMap(jbItemNetherMapID);
+			jbItemNetherMap.SetBuoyancy(1.0F);
+			jbItemEmptyNetherMap = new JBItemEmptyNetherMap(jbItemEmptyNetherMapID);
+			
+			jbItemAstrolabeFrame = new JBItemAstrolabeFrame(jbItemAstrolabeFrameID);
+			
+			AddVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemAstrolabeFrame),
+					new Object[] { " B ", "BIB", " B ", 'B', new ItemStack(Block.woodenButton), 'I',
+							new ItemStack(Block.blockIron)});
+			
+			AddVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbBlockAstrolabe, 1, 0),
+					new Object[] { " P ", "LF ", "RI ",
+							'F', new ItemStack(JBJorgesMiscellaneous.jbItemAstrolabeFrame),
+							'P' ,new ItemStack(Item.paper),
+							'L', new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch),
+							'R', new ItemStack(Item.redstone),
+							'I', new ItemStack(FCBetterThanWolves.fcLightBulbOff)});
+			
+			AddVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,0),
+					new Object[] {"IDI","ILI","RNN",
+								'I', new ItemStack(Item.ingotIron),
+								'D', new ItemStack(Item.diamond),
+								'L', new ItemStack(FCBetterThanWolves.fcLens),
+								'R', new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch),
+								'N', new ItemStack(FCBetterThanWolves.fcItemNuggetIron)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,1), new Object[] {
+					new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,0),
+					new ItemStack(Item.diamond)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,2), new Object[] {
+					new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,1),
+					new ItemStack(Item.diamond)});
+			
+			AddVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,3),
+					new Object[] {"IWI","ILI","RNN",
+								'I', new ItemStack(Item.ingotIron),
+								'W', new ItemStack(Item.skull.itemID, 1, 1),
+								'L', new ItemStack(FCBetterThanWolves.fcLens),
+								'R', new ItemStack(FCBetterThanWolves.fcItemRedstoneLatch),
+								'N', new ItemStack(FCBetterThanWolves.fcItemNuggetIron)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,4), new Object[] {
+					new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,3),
+					new ItemStack(Item.skull.itemID, 1, 1)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,5), new Object[] {
+					new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,4),
+					new ItemStack(Item.skull.itemID, 1, 1)});
+			
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyStarMap,1,0),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,0)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyStarMap,1,1),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,1)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyStarMap,1,2),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,2)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyNetherMap,1,3),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,3)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyNetherMap,1,4),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,4)});
+			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyNetherMap,1,5),
+					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,5)});
 		} 
 		catch (Exception e) {
       String var2 = "***Jorge's Miscellaneous Addon has not been properly installed. Please consult the readme.txt file for installation instructions***";
@@ -86,17 +184,17 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 		}
 	}
 
-  private boolean DecoInstalled() {
-  	try {
-      Class.forName("AddonManager");
-      return true;
-    }
-    	catch(Exception e) {
-        return false;
-    }    	
-  }
-	
-	public static void vanillaConstruct() {}
+	private boolean DecoInstalled() {
+		try {
+			Class.forName("AddonManager");
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static void vanillaConstruct() {
+	}
 
 	public void CreateAssociatedItemForBlock(Block var1) {
 		int var2 = var1.blockID;
@@ -109,9 +207,18 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 	}
 
 	public void OnLanguageLoaded(StringTranslate var1) {
-		for (int i=0;i<=15;i++) {
-			this.AddBlockName(var1, JBBlockArrowMarkerArray[i], JBBlockArrowMarker.colorDisplayNames[i]+" Arrow Marker");	
+		for (int i = 0; i <= 15; i++) {
+			this.AddBlockName(var1, JBBlockArrowMarkerArray[i], JBBlockArrowMarker.colorDisplayNames[i] + " Arrow Marker");
 		}
+		
+	 	this.AddItemName(var1, jbItemProjectionLens, "Projection Lens");
+  	this.AddItemName(var1, jbItemEmptyStarMap, "Empty Star Map");
+  	this.AddItemName(var1, jbItemStarMap, "Star Map");
+  	this.AddItemName(var1, jbItemEmptyNetherMap, "Empty Soul Map");
+  	this.AddItemName(var1, jbItemAstrolabeFrame, "Astrolabe Frame");
+  	this.AddItemName(var1, jbItemNetherMap, "Soul Map");
+  	this.AddBlockName(var1, jbBlockAstrolabe, "Astrolabe");
+  	this.AddBlockName(var1, jbBlockProjectionLens, "Projection Lens");
 	}
 
 	private void AddBlockName(StringTranslate var1, Block var2, String var3) {
@@ -122,7 +229,7 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 	public static void AddVanillaRecipe(ItemStack var0, Object[] var1) {
 		CraftingManager.getInstance().addRecipe(var0, var1);
 	}
-	
+
 	private static void readConfigFile() {
 		File file = new File(new File("."), "JorgesMiscellaneousConfig.txt");
 
@@ -135,33 +242,111 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 			BufferedReader buffer = new BufferedReader(new FileReader(file));
 			String line = "";
 
+			// Arrow Marker Block IDs
 			while ((line = buffer.readLine()) != null) {
 				String[] value = line.split("=");
 
-				for (int i=0; i<value.length; ++i) {
+				for (int i = 0; i < value.length; ++i) {
 					value[i] = value[i].trim();
 				}
 
-				for (int i=0; i<=15; ++i) {
-					if (value[0].equals("jbBlockArrowMarker"+JBBlockArrowMarker.colorTextureNames[i]+"ID")) {
-						JBBlockArrowMarkerIDArray[i] = (Integer.parseInt(value[1])>0)?Integer.parseInt(value[1]):JBBlockArrowMarkerIDArray[i];
+				for (int i = 0; i <= 15; ++i) {
+					if (value[0].equals("jbBlockArrowMarker" + JBBlockArrowMarker.colorTextureNames[i] + "ID")) {
+						JBBlockArrowMarkerIDArray[i] = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1])
+								: JBBlockArrowMarkerIDArray[i];
 						break;
-					}	
+					}
 				}
 
+				// Hardcore Day command
 				if (value[0].equals("enableHardcoreDayCommand")) {
-					hardcoreDayEnabled = (Integer.parseInt(value[1])==1)?true:false;					
+					hardcoreDayEnabled = (Integer.parseInt(value[1]) == 1) ? true : false;
+				}
+
+				// Astrolabe Block IDs
+
+				for (int i = 0; i < value.length; ++i) {
+					value[i] = value[i].trim();
+				}
+
+				if (value[0].equals("jbBlockAstrolabeID")) {
+					jbBlockAstrolabeID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1]) : jbBlockAstrolabeID;
+				}
+				if (value[0].equals("jbBlockProjectionLensID")) {
+					jbBlockProjectionLensID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1])
+							: jbBlockProjectionLensID;
+				}
+				if (value[0].equals("jbItemProjectionLensID")) {
+					jbItemProjectionLensID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1])
+							: jbItemProjectionLensID;
+				}
+				if (value[0].equals("jbItemEmptyStarMapID")) {
+					jbItemEmptyStarMapID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1]) : jbItemEmptyStarMapID;
+				}
+				if (value[0].equals("jbItemStarMapID")) {
+					jbItemStarMapID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1]) : jbItemStarMapID;
+				}
+				if (value[0].equals("jbItemEmptyNetherMapID")) {
+					jbItemEmptyNetherMapID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1])
+							: jbItemEmptyNetherMapID;
+				}
+				if (value[0].equals("jbItemAstrolabeFrameID")) {
+					jbItemAstrolabeFrameID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1])
+							: jbItemAstrolabeFrameID;
+				}
+				if (value[0].equals("jbItemNetherMapID")) {
+					jbItemNetherMapID = (Integer.parseInt(value[1]) > 0) ? Integer.parseInt(value[1]) : jbItemNetherMapID;
 				}
 			}
 
 			buffer.close();
-		}
-		catch (Exception e) {
+		} catch (IOException e) {
 			System.out.println("Failed to load Jorge's Miscellaneous config file");
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp,
+			Packet250CustomPayload packet) {
+		try {
+			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+
+			if (packet.channel.equals("JB|CSM")) {
+				int length = dis.readInt();
+				String name = "";
+				for (int i = 0; i < length; i++) {
+					name = name + dis.readChar();
+				}
+				float x = dis.readFloat();
+				float z = dis.readFloat();
+
+				ItemStack starMap = new ItemStack(JBJorgesMiscellaneous.jbItemStarMap.itemID, 1, 0);
+				starMap.setItemName(name);
+				((JBItemStarMap) starMap.getItem()).setMapCoords(starMap, x, z);
+
+				EntityItem entity = epmp.dropPlayerItem(starMap);
+				entity.delayBeforeCanPickup = 0;
+			} else if (packet.channel.equals("JB|CNM")) {
+				int length = dis.readInt();
+				String name = "";
+				for (int i = 0; i < length; i++) {
+					name = name + dis.readChar();
+				}
+				float x = dis.readFloat();
+				float z = dis.readFloat();
+
+				ItemStack netherMap = new ItemStack(JBJorgesMiscellaneous.jbItemNetherMap.itemID, 1, 0);
+				netherMap.setItemName(name);
+				((JBItemNetherMap) netherMap.getItem()).setMapCoords(netherMap, x, z);
+
+				EntityItem entity = epmp.dropPlayerItem(netherMap);
+				entity.delayBeforeCanPickup = 0;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static long getHardcoreDayTimedOut() {
 		return hardcoreDayTimedOut;
 	}
@@ -169,8 +354,25 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 	public static void setHardcoreDayTimedOut(long hardcoreDayTimedOut) {
 		JBJorgesMiscellaneous.hardcoreDayTimedOut = hardcoreDayTimedOut;
 	}
-	
+
 	public static boolean isHardcoreDayEnabled() {
 		return hardcoreDayEnabled;
 	}
+
+	private void AddItemName(StringTranslate var1, Item var2, String var3) {
+		String var4 = var2.getUnlocalizedName() + ".name";
+		var1.GetTranslateTable().put(var4, var3);
+	}
+
+	public static void AddShapelessVanillaRecipe(ItemStack var0, Object[] var1) {
+		CraftingManager.getInstance().addShapelessRecipe(var0, var1);
+	}
+
+	public static void AddShapelessAnvilRecipe(ItemStack var0, Object[] var1) {
+		FCCraftingManagerAnvil.getInstance().addShapelessRecipe(var0, var1);
+	}
+	
+  public static void AddAnvilRecipe(ItemStack var0, Object[] var1) {
+    FCCraftingManagerAnvil.getInstance().addRecipe(var0, var1);
+  }
 }

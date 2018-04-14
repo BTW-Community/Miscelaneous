@@ -10,8 +10,8 @@ public class JBBlockArrowMarker extends Block implements FCIBlock {
 		this.setHardness(0.8F);
 		this.setResistance(10.0F);
 		this.color = color;
-		setUnlocalizedName("JBBlockArrowMarker"+colorTextureNames[color]);
-		setCreativeTab(CreativeTabs.tabDecorations);
+		this.setUnlocalizedName("JBBlockArrowMarker"+colorTextureNames[color]);
+		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override

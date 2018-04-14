@@ -5,13 +5,6 @@ Minecraft Better Than Wolves Addon
 
 To install this mod you need Minecraft 1.5.2 and Better Than Wolves V4.AAABBBA or newer installed correctly. Please check the instalation instructions for BTW before you install this addon.
 
-### ------------ WARNING FOR ASTROLABE ADDON USERS ------------
-If you do not use the Astrolabe addon you can skip this.
-
-If you do use the Astrolabe addon on your game and you decide to install this addon alongside it, you must update Astrolabe to  version "4.3 Conflicting Relations" or newer. If you don't, you will have compatibility problems.
-
----
-
 ### ------------ IMPORTANT WARNING ------------
 Make sure you make a backup of your saves and of your minecraft before you install this addon. The addon should not have any problems, but there may be bugs I have not come across yet, and they could make Minecraft crash, and on crashing you risk losing your inventory or corrupt your world. So MAKE A BACKUP! 
 
@@ -30,6 +23,11 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 \-------------------------------------------------
 
 ## Changelog:
+
+### - Version 3.0 Starry Expanse
+Merged this addon with the Astrolabe addon.
+For instructions on how to use the Astrolabe, please read the top post on the following link:
+http://www.sargunster.com/btwforum/viewtopic.php?f=12&t=9361
 
 ### - Version 2.0 No It Burns
 Added "/hardcoreday", an utility command. It works only on servers or lan worlds that only have one player logged in.

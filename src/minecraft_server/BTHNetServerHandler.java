@@ -26,12 +26,11 @@ public class BTHNetServerHandler extends NetServerHandler {
 	public void handleCustomPayload(Packet250CustomPayload aPacket) {
 		super.handleCustomPayload(aPacket);
 
-		String[] mods = new String[] { "JBAstrolabe", "AddonManager", "JBJorgesMiscellaneous" };
+		String[] mods = new String[] { "JBJorgesMiscellaneous", "AddonManager" };
 		for (String mod : mods) {
 			try {
 				//Class.forName("net.minecraft.src."+mod).getMethod("serverCustomPacketReceived", MinecraftServer.class, EntityPlayerMP.class, Packet250CustomPayload.class).invoke(null, this.mcServer, this.playerEntity, aPacket);
-				Class.forName(mod).getMethod("serverCustomPacketReceived", MinecraftServer.class,
-						EntityPlayerMP.class, Packet250CustomPayload.class).invoke(null, this.mcServer, this.playerEntity, aPacket);
+				Class.forName(mod).getMethod("serverCustomPacketReceived", MinecraftServer.class, EntityPlayerMP.class, Packet250CustomPayload.class).invoke(null, this.mcServer, this.playerEntity, aPacket);
 			} catch (ClassNotFoundException e) {} catch (Exception e) {}
 		}
 	}

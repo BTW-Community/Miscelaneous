@@ -1,3 +1,4 @@
+// Arrow Marker Block IDs
 jbBlockArrowMarkerBlackID=4000
 jbBlockArrowMarkerRedID=4001
 jbBlockArrowMarkerDarkGreenID=4002
@@ -14,6 +15,16 @@ jbBlockArrowMarkerLightBlueID=4012
 jbBlockArrowMarkerMagentaID=4013
 jbBlockArrowMarkerOrangeID=4014
 jbBlockArrowMarkerWhiteID=4015
+
+// Astrolabe Related IDs
+jbBlockAstrolabeID=170
+jbBlockProjectionLensID=171
+jbItemNetherMapID=22217
+jbItemEmptyNetherMapID=22218
+jbItemProjectionLensID=22219
+jbItemEmptyStarMapID=22220
+jbItemStarMapID=22221
+jbItemAstrolabeFrameID=22522
 
 // Set the following to 1 to enable the "hardcoreday" command.
 enableHardcoreDayCommand=0
