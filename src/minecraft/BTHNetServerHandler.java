@@ -14,6 +14,10 @@ public class BTHNetServerHandler extends NetServerHandler {
 		try {
 			//if (Class.forName("net.minecraft.src.JBJorgesMiscellaneous") != null) {
 			if (Class.forName("JBJorgesMiscellaneous") != null) {
+				
+				System.out.println("AAAAA1");
+				JBJorgesMiscellaneous.sendJBMiscTest(aPlayer);
+				System.out.println("AAAAA2");
 				if (aServer.getCommandManager() != null && aServer.getCommandManager() instanceof ServerCommandManager) {
 					//Object object = Class.forName("net.minecraft.src.JBCommandServerHardcoreDay").newInstance();
 					Object object = Class.forName("JBCommandServerHardcoreDay").newInstance();

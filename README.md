@@ -24,6 +24,9 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 
 ## Changelog:
 
+### - Version 3.1 Starry Expanse
+Added a client check when joining a server or lan game. If the server has this addon installed and the client does not, the client will receive a warning to install it, with a link to the forum post.
+
 ### - Version 3.0 Starry Expanse
 Merged this addon with the Astrolabe addon.
 For instructions on how to use the Astrolabe, please read the top post on the following link:

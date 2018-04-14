@@ -8,12 +8,15 @@ public class BTHNetServerHandler extends NetServerHandler {
 
 	public BTHNetServerHandler(MinecraftServer aServer, INetworkManager aNetManager, EntityPlayerMP aPlayer) {
 		super(aServer, aNetManager, aPlayer);
-
+		
 		this.mcServer = aServer;
 		
 		try {
 			//if (Class.forName("net.minecraft.src.JBJorgesMiscellaneous") != null) {
 			if (Class.forName("JBJorgesMiscellaneous") != null) {
+				
+				JBJorgesMiscellaneous.sendJBMiscTest(aPlayer);
+				
 				if (aServer.getCommandManager() != null && aServer.getCommandManager() instanceof ServerCommandManager) {
 					//Object object = Class.forName("net.minecraft.src.JBCommandServerHardcoreDay").newInstance();
 					Object object = Class.forName("JBCommandServerHardcoreDay").newInstance();
@@ -22,7 +25,7 @@ public class BTHNetServerHandler extends NetServerHandler {
 			}
 		} catch (ClassNotFoundException e) {} catch (Exception e) {}
 	}
-
+	
 	public void handleCustomPayload(Packet250CustomPayload aPacket) {
 		super.handleCustomPayload(aPacket);
 

@@ -74,21 +74,4 @@ public class JBCommandServerHardcoreDay extends CommandBase {
   public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender) {
 		return true;
   }
-
-	// public static void ServerOpenCustomInterface(EntityPlayerMP var0, int
-	// scale, float x, float z) {
-	// try {
-	// ByteArrayOutputStream var4 = new ByteArrayOutputStream();
-	// DataOutputStream var5 = new DataOutputStream(var4);
-	// var5.writeInt(scale);
-	// var5.writeFloat(x);
-	// var5.writeFloat(z);
-	// Packet250CustomPayload var6 = new Packet250CustomPayload("JB|OIS",
-	// var4.toByteArray());
-	// var0.playerNetServerHandler.sendPacketToPlayer(var6);
-	// }
-	// catch (Exception var7) {
-	// var7.printStackTrace();
-	// }
-	// }
 }

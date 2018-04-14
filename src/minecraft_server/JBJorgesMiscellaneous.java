@@ -1,16 +1,24 @@
 package net.minecraft.src;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.Timer;
 
 import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "3.0 Starry Expanse";
+	public static final String jbVersionString = "3.1 Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
@@ -37,6 +45,8 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 	private static int jbItemEmptyNetherMapID = 22218;
 	public static Item jbItemNetherMap;
 	private static int jbItemNetherMapID = 22217;
+	
+	private static HashMap<String,Timer> testingPlayerTimerMap = new HashMap<String,Timer>();
 	
 	@Override
 	public void Initialize() {
@@ -311,7 +321,19 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 		try {
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
 
-			if (packet.channel.equals("JB|CSM")) {
+			if (packet.channel.equals("JB|JBMISCOK")) {
+				int length = dis.readInt();
+				byte[] array = new byte[length];
+				dis.read(array);
+				
+				String playerUsername = new String(array);
+				
+				if (testingPlayerTimerMap.containsKey(playerUsername)) {
+					testingPlayerTimerMap.get(playerUsername).stop();
+					testingPlayerTimerMap.remove(playerUsername);
+				}
+			}
+			else if (packet.channel.equals("JB|CSM")) {
 				int length = dis.readInt();
 				String name = "";
 				for (int i = 0; i < length; i++) {
@@ -375,4 +397,38 @@ public class JBJorgesMiscellaneous extends FCAddOn {
   public static void AddAnvilRecipe(ItemStack var0, Object[] var1) {
     FCCraftingManagerAnvil.getInstance().addRecipe(var0, var1);
   }
+  
+	public static void sendJBMiscTest(EntityPlayerMP var0) {
+		final EntityPlayerMP player = var0;
+		Timer t = new Timer(5000,new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HashMap<String,Timer> map = JBJorgesMiscellaneous.getTestingPlayerTimerMap();
+				if (map.containsKey(player.username)) {
+					player.sendChatToPlayer("§4This server requires all clients to have Jorge's Miscelaneous addon. Please install it before joining.");
+					player.sendChatToPlayer("§aAddon Link: http://tinyurl.com/jorgesmisc");
+					testingPlayerTimerMap.remove(player.username);
+				}
+			}
+		});
+		
+		testingPlayerTimerMap.put(player.username,t);
+		t.setRepeats(false);
+		t.start();
+		
+		try {
+			ByteArrayOutputStream var4 = new ByteArrayOutputStream();
+			byte[] data = new byte[0];
+			DataOutputStream var5 = new DataOutputStream(var4);
+			var5.writeInt(player.username.length());
+			var5.writeBytes(player.username);
+			Packet250CustomPayload var6 = new Packet250CustomPayload("JB|JBMISC", var4.toByteArray());
+			var0.playerNetServerHandler.sendPacket(var6);
+		}
+		catch(Exception e) {}
+	}
+	
+	public static HashMap<String,Timer> getTestingPlayerTimerMap() {
+		return testingPlayerTimerMap;
+	}
 }
