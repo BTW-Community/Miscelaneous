@@ -23,7 +23,8 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 \-------------------------------------------------
 
 ## Changelog:
-
+<details>
+<summary>Click to view</summary>
 ### - Version 3.1b Starry Expanse
 Fixed issue with Astrolabe and Lens block durabilities and materials being based on steel and not iron.
 
@@ -57,3 +58,4 @@ S S S
 Where:
  _ is an empty space.
  D is a dye item. You need three dyes of the same color. This addon is compatible with the Deco Addon, which means you can mix different same-colored dyes in one recipe. For example, you can use both white dye and bone meal together, you can use blue dye and lapis lazuli, but you cannot mix dyes of different colors.
+</details>
