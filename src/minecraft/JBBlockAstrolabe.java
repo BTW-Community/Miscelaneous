@@ -8,11 +8,11 @@ public class JBBlockAstrolabe extends BlockContainer{
 	private Icon[] m_IconBySideArray = new Icon[6];
 
 	public JBBlockAstrolabe(int i) {
-		super(i, FCBetterThanWolves.fcMaterialSoulforgedSteel);
+		super(i, Material.iron);
 		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setLightOpacity(0);
-		this.setHardness(10.0F);
-		this.setResistance(2000.0F);
+		this.setHardness(5.0F);
+		this.setResistance(10.0F);
 		this.setStepSound(soundMetalFootstep);
 		this.setUnlocalizedName("jbBlockAstrolabe");
 		this.setCreativeTab(CreativeTabs.tabRedstone);
