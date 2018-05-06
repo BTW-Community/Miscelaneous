@@ -18,7 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "3.1b Starry Expanse";
+	public static final String jbVersionString = "3.1c Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
