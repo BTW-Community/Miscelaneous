@@ -25,6 +25,29 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 ## Changelog:
 <details>
 <summary>Click to view</summary>
+### - Version 3.2b Starry Expanse
+Updated addon compatibility with BTW Version 4.ABCEEFABc
+
+### - Version 3.2a Starry Expanse
+Fixed blue and white marker recipes
+ 
+### - Version 3.2 Starry Expanse
+Changed the arrow marker recipes to balance it with the new BTW changes.
+
+To create an Arrow Marker, you need to follow this recipe:
+
+C D C
+D C D
+S S S
+
+Where:
+ C is a piece of clay.
+ D is a dye item. You need three dyes of the same color. This addon is compatible with the Deco Addon, which means you can mix different same-colored dyes in one recipe. For example, you can use both white dye and bone meal together, you can use blue dye and lapis lazuli, but you cannot mix dyes of different colors.
+ S is a block of loose cobblestone.
+
+### - Version 3.1c Starry Expanse
+Did some rework to facilitate future compatibility with other mods.
+
 ### - Version 3.1b Starry Expanse
 Fixed issue with Astrolabe and Lens block durabilities and materials being based on steel and not iron.
 
@@ -49,13 +72,4 @@ First release.
 
 Added the Arrow Marker blocks. They can be put on the ground over a solid block, and will point to the direction the player is facing. They can be rotated by right clicking with an empty hand. They are made of stone, so you need a pickaxe to break them.
 
-To create an Arrow Marker, you need to follow this recipe:
-
-_ D _
-D _ D
-S S S
-
-Where:
- _ is an empty space.
- D is a dye item. You need three dyes of the same color. This addon is compatible with the Deco Addon, which means you can mix different same-colored dyes in one recipe. For example, you can use both white dye and bone meal together, you can use blue dye and lapis lazuli, but you cannot mix dyes of different colors.
 </details>

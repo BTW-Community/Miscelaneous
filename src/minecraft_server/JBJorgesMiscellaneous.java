@@ -18,7 +18,7 @@ import javax.swing.Timer;
 import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "3.1c Starry Expanse";
+	public static final String jbVersionString = "3.2a Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
@@ -79,12 +79,13 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 			
 			for (int color=0;color<=15;color++) {
 				if (color!=4 && color!=15) {
-					AddVanillaRecipe(new ItemStack(JBBlockArrowMarkerArray[color],6,0),
-							new Object[] {" D ","E F","SSS",
+					AddVanillaRecipe(new ItemStack(JBBlockArrowMarkerArray[color], 12, 0),
+							new Object[] { "CDC", "ECF", "SSS",
+									'C', new ItemStack(Item.clay, 1),
 									'D', new ItemStack(Item.dyePowder, 1, color),
 									'E', new ItemStack(Item.dyePowder, 1, color),
 									'F', new ItemStack(Item.dyePowder, 1, color),
-									'S', new ItemStack(Block.stone, 1)});
+									'S', new ItemStack(FCBetterThanWolves.fcBlockCobblestoneLoose, 1) });
 				}
 				else {
 					int maxDyeMetaMultiplier = 0;
@@ -98,12 +99,14 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 								int e = color+16*j;
 								int f = color+16*k;
 								
-								AddVanillaRecipe(new ItemStack(JBBlockArrowMarkerArray[color],6,0),
-										new Object[] {" D ","E F","SSS",
+								AddVanillaRecipe(new ItemStack(JBBlockArrowMarkerArray[color], 12, 0),
+										new Object[] {
+												"CDC", "ECF", "SSS",
+												'C', new ItemStack(Item.clay, 1),
 												'D', new ItemStack(Item.dyePowder, 1, d),
 												'E', new ItemStack(Item.dyePowder, 1, e),
 												'F', new ItemStack(Item.dyePowder, 1, f),
-												'S', new ItemStack(Block.stone, 1)});
+												'S', new ItemStack(FCBetterThanWolves.fcBlockCobblestoneLoose, 1) });
 							}
 						}	
 					}

@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public class JBBlockArrowMarker extends Block implements FCIBlock {
+public class JBBlockArrowMarker extends Block {
 	public static final String[] colorDisplayNames = new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Gray", "Dark Gray", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White"};
 	public static final String[] colorTextureNames = new String[] {"Black", "Red", "DarkGreen", "Brown", "DarkBlue", "Purple", "Cyan", "LightGray", "DarkGray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
 	
@@ -40,8 +40,8 @@ public class JBBlockArrowMarker extends Block implements FCIBlock {
 		return false;
 	}
 
-	public void RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5) {
-		FCUtilsMisc.StandardRotateAroundJ(this, var1, var2, var3, var4, var5);
+	public boolean RotateAroundJAxis(World var1, int var2, int var3, int var4, boolean var5) {
+		return FCUtilsMisc.StandardRotateAroundJ(this, var1, var2, var3, var4, var5);
 	}
 
 	public int RotateMetadataAroundJAxis(int var1, boolean var2) {
@@ -73,9 +73,8 @@ public class JBBlockArrowMarker extends Block implements FCIBlock {
 	}
 
 	public void onBlockPlacedBy(World var1, int var2, int var3, int var4, EntityLiving var5, ItemStack var6) {
-		int var7 = FCUtilsMisc.ConvertPlacingEntityOrientationToFlatBlockFacing(var5);
+		int var7 = FCUtilsMisc.ConvertOrientationToFlatBlockFacingReversed(var5);
 		this.SetFacing(var1, var2, var3, var4, var7);
-
 	}
 
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {

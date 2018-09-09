@@ -11,47 +11,7 @@ public class BlockCactus extends Block
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.tabDecorations);
         
-        String JBAstrolabeClassName = "JBAstrolabe";
-    		String JBJorgesMiscellaneousClassName = "JBJorgesMiscellaneous";
-    		String staticMethodName = "vanillaConstruct";
-    		Object[] effectiveParameters = new Object[] {};
-    		String packageName = "net.minecraft.src";
-
-    		try {
-    			Class<?> clazz = null;
-    			if (packageExists(packageName))
-    				clazz = Class.forName(packageName + "." + JBJorgesMiscellaneousClassName);
-    			else
-    				clazz = Class.forName(JBJorgesMiscellaneousClassName);
-
-    			Method method = clazz.getMethod(staticMethodName);
-    			method.invoke(null, effectiveParameters);
-    		} catch (Exception e) {
-    			System.out.println("Jorge's Miscellaneous Addon not found...");
-    		}
-
-    		try {
-    			Class<?> clazz = null;
-    			if (packageExists(packageName))
-    				clazz = Class.forName(packageName + "." + JBAstrolabeClassName);
-    			else
-    				clazz = Class.forName(JBAstrolabeClassName);
-    			
-    			Method method = clazz.getMethod(staticMethodName);
-    			method.invoke(null, effectiveParameters);
-    		} catch (Exception e) {
-    			System.out.println("Astrolabe Addon not found...");
-    		}
-    }
-    
-    private boolean packageExists(String p) {
-    	try {
-    		Class.forName(p+".FCBetterThanWolves");
-        return true;
-	    }
-	    	catch(Exception e) {
-	        return false;
-	    }    	
+        JBJorgesMiscellaneous.vanillaConstruct();
     }
 
     /**
