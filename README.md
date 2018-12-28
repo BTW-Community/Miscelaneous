@@ -25,6 +25,12 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 ## Changelog:
 <details>
 <summary>Click to view</summary>
+### - Version 3.2d Starry Expanse
+Fixed potential render problem.
+
+### - Version 3.2c Starry Expanse
+Updated addon compatibility with BTW Version 4.ABCFEFE, fixed block render issues.
+
 ### - Version 3.2b Starry Expanse
 Updated addon compatibility with BTW Version 4.ABCEEFABc
 

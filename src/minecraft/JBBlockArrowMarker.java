@@ -1,22 +1,26 @@
 package net.minecraft.src;
 
 public class JBBlockArrowMarker extends Block {
-	public static final String[] colorDisplayNames = new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "Light Gray", "Dark Gray", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White"};
-	public static final String[] colorTextureNames = new String[] {"Black", "Red", "DarkGreen", "Brown", "DarkBlue", "Purple", "Cyan", "LightGray", "DarkGray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
-	
+	public static final String[] colorDisplayNames = new String[] { "Black", "Red", "Green", "Brown", "Blue", "Purple",
+			"Cyan", "Light Gray", "Dark Gray", "Pink", "Lime", "Yellow", "Light Blue", "Magenta", "Orange", "White" };
+	public static final String[] colorTextureNames = new String[] { "Black", "Red", "DarkGreen", "Brown", "DarkBlue",
+			"Purple", "Cyan", "LightGray", "DarkGray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
+
 	private int color = 0;
+
 	public JBBlockArrowMarker(int ID, int color) {
 		super(ID, Material.rock);
 		this.setHardness(0.8F);
 		this.setResistance(10.0F);
 		this.color = color;
-		this.setUnlocalizedName("JBBlockArrowMarker"+colorTextureNames[color]);
+		this.InitBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F - 0.0625F, 0.0625F, 1.0F - 0.0625F);
+		this.setUnlocalizedName("JBBlockArrowMarker" + colorTextureNames[color]);
 		this.setCreativeTab(CreativeTabs.tabDecorations);
 	}
 
 	@Override
 	public void registerIcons(IconRegister var1) {
-		this.blockIcon = var1.registerIcon("JBBlockArrowMarker"+colorTextureNames[color]);
+		this.blockIcon = var1.registerIcon("JBBlockArrowMarker" + colorTextureNames[color]);
 	}
 
 	public int GetFacing(IBlockAccess var1, int var2, int var3, int var4) {
@@ -100,16 +104,20 @@ public class JBBlockArrowMarker extends Block {
 		}
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4) {
-		return null;
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		return GetBlockBoundsFromPoolBasedOnState(world, i, j, k).offset(i, j, k);
 	}
 
-    public void setBlockBoundsForItemRender() {
-        this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F - 0.0625F, 0.0625F, 1.0F - 0.0625F);
-    }
-	
-	public void setBlockBoundsBasedOnState(IBlockAccess var1, int var2, int var3, int var4) {
-		this.setBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F - 0.0625F, 0.0625F, 1.0F - 0.0625F);
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int i, int j, int k) {
+		return GetBlockBoundsFromPoolBasedOnState(world, i, j, k).offset(i, j, k);
+	}
+
+	public AxisAlignedBB GetBlockBoundsFromPoolForItemRender(int iItemDamage) {
+		return GetFixedBlockBoundsFromPool();
+	}
+
+	public AxisAlignedBB GetBlockBoundsFromPoolBasedOnState(IBlockAccess blockAccess, int i, int j, int k) {
+		return GetFixedBlockBoundsFromPool();
 	}
 
 	@Override
@@ -132,16 +140,15 @@ public class JBBlockArrowMarker extends Block {
 			return true;
 		}
 	}
-	
+
 	@Override
 	public boolean RenderBlock(RenderBlocks var1, int var2, int var3, int var4) {
 		super.RenderBlock(var1, var2, var3, var4);
 		IBlockAccess var5 = var1.blockAccess;
-	
 
 		int metadata = var5.getBlockMetadata(var2, var3, var4);
 		int facing = GetFacingFromMetadata(metadata);
-		
+
 		if (facing == 2) {
 			var1.SetUvRotateTop(3);
 		} else if (facing == 4) {
@@ -149,10 +156,10 @@ public class JBBlockArrowMarker extends Block {
 		} else if (facing == 5) {
 			var1.SetUvRotateTop(2);
 		}
-		
+
 		var1.renderFaceYPos(this, (double) var2, (double) var3, (double) var4, this.blockIcon);
-		var1.setRenderBoundsFromBlock(this);
-    var1.renderStandardBlock(this, var2, var3, var4);		
+		var1.setRenderBounds( GetBlockBoundsFromPoolBasedOnState(var5, var2, var3, var4));
+		var1.renderStandardBlock(this, var2, var3, var4);
 		var1.ClearUvRotation();
 
 		return true;

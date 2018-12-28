@@ -6,7 +6,7 @@ public class JBBlockAstrolabe extends BlockContainer{
 
 	public JBBlockAstrolabe(int i) {
 		super(i, Material.iron);
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		this.InitBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		this.setLightOpacity(0);
 		this.setHardness(5.0F);
 		this.setResistance(10.0F);

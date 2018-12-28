@@ -8,6 +8,7 @@ public class JBBlockArrowMarker extends Block {
 		super(ID, Material.rock);
 		this.setHardness(0.8F);
 		this.setResistance(10.0F);
+		this.InitBlockBounds(0.0625F, 0.0F, 0.0625F, 1.0F - 0.0625F, 0.0625F, 1.0F - 0.0625F);
 		setUnlocalizedName("JBBlockArrowMarker"+colorTextureNames[color]);
 		setCreativeTab(CreativeTabs.tabDecorations);
 	}
