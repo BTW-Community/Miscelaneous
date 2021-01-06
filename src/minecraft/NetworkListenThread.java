@@ -26,10 +26,17 @@ public abstract class NetworkListenThread
      */
     public void addPlayer(NetServerHandler par1NetServerHandler)
     {
-      //DNCode Start
-      //this.connections.add(par1NetServerHandler);
-      this.connections.add(new GenericBTWAddonNetServerHandler(this.getServer(), par1NetServerHandler.netManager, par1NetServerHandler.playerEntity));
-      //DNCode End
+        this.connections.add(par1NetServerHandler);        
+        initJorgesMiscPlayers(par1NetServerHandler);
+    }
+    
+    private void initJorgesMiscPlayers(NetServerHandler par1NetServerHandler) {
+        JBJorgesMiscellaneous.sendJBMiscTest(par1NetServerHandler.playerEntity);
+
+		if (this.mcServer.getCommandManager() != null && this.mcServer.getCommandManager() instanceof ServerCommandManager) {
+			JBCommandServerHardcoreDay jbCommandServerHardcoreDay = new JBCommandServerHardcoreDay();
+			((ServerCommandManager)MinecraftServer.getServer().getCommandManager()).registerCommand(new JBCommandServerHardcoreDay());
+		}
     }
 
     public void stopListening()

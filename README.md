@@ -3,7 +3,7 @@ Minecraft Better Than Wolves Addon
 
 ### Installation Requirements:
 
-To install this mod you need Minecraft 1.5.2 and Better Than Wolves V4.ABCFEFE or newer installed correctly. Please check the instalation instructions for BTW before you install this addon.
+To install this mod you need Minecraft 1.5.2 and Better Than Wolves V4.B0000003 or newer installed correctly. Please check the instalation instructions for BTW before you install this addon.
 
 ### ------------ IMPORTANT WARNING ------------
 Make sure you make a backup of your saves and of your minecraft before you install this addon. The addon should not have any problems, but there may be bugs I have not come across yet, and they could make Minecraft crash, and on crashing you risk losing your inventory or corrupt your world. So MAKE A BACKUP! 
@@ -25,6 +25,10 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 ## Changelog:
 <details>
 <summary>Click to view</summary>
+
+### - Version 3.2e Starry Expanse
+Updated addon compatibility with BTW Version 4.B0000003
+Fixed issue with client/server code that was causing bugs with villager trades
 
 ### - Version 3.2d Starry Expanse
 Fixed potential render problem.

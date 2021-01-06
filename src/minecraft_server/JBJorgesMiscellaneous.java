@@ -18,7 +18,7 @@ import javax.swing.Timer;
 import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "3.2d Starry Expanse";
+	public static final String jbVersionString = "3.2e Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
@@ -319,10 +319,11 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 		}
 	}
 
-	public static void serverCustomPacketReceived(MinecraftServer ms, EntityPlayerMP epmp,
-			Packet250CustomPayload packet) {
+	@Override
+	public boolean ServerCustomPacketReceived(NetServerHandler netServerHandler, Packet250CustomPayload packet) {
 		try {
 			DataInputStream dis = new DataInputStream(new ByteArrayInputStream(packet.data));
+			EntityPlayerMP epmp = netServerHandler.playerEntity;
 
 			if (packet.channel.equals("JB|JBMISCOK")) {
 				int length = dis.readInt();
@@ -335,6 +336,8 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 					testingPlayerTimerMap.get(playerUsername).stop();
 					testingPlayerTimerMap.remove(playerUsername);
 				}
+				
+				return true;
 			}
 			else if (packet.channel.equals("JB|CSM")) {
 				int length = dis.readInt();
@@ -351,6 +354,8 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 
 				EntityItem entity = epmp.dropPlayerItem(starMap);
 				entity.delayBeforeCanPickup = 0;
+				
+				return true;
 			} else if (packet.channel.equals("JB|CNM")) {
 				int length = dis.readInt();
 				String name = "";
@@ -366,10 +371,14 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 
 				EntityItem entity = epmp.dropPlayerItem(netherMap);
 				entity.delayBeforeCanPickup = 0;
+				
+				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return true;
 	}
 
 	public static long getHardcoreDayTimedOut() {
