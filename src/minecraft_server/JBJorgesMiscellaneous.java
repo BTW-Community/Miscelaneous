@@ -18,7 +18,7 @@ import javax.swing.Timer;
 import net.minecraft.server.MinecraftServer;
 
 public class JBJorgesMiscellaneous extends FCAddOn {
-	public static final String jbVersionString = "3.2e Starry Expanse";
+	public static final String jbVersionString = "3.2f Starry Expanse";
 	public static JBJorgesMiscellaneous m_instance = new JBJorgesMiscellaneous();
 
 	private static Block[] JBBlockArrowMarkerArray = new Block[16];
@@ -187,6 +187,8 @@ public class JBJorgesMiscellaneous extends FCAddOn {
 					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,4)});
 			AddShapelessVanillaRecipe(new ItemStack(JBJorgesMiscellaneous.jbItemEmptyNetherMap,1,5),
 					new Object[] {new ItemStack(Item.emptyMap),new ItemStack(JBJorgesMiscellaneous.jbItemProjectionLens,1,5)});
+			
+			DawnServerCommandManager.registerAddonCommand(new JBCommandServerHardcoreDay());
 		} 
 		catch (Exception e) {
       String var2 = "***Jorge's Miscellaneous Addon has not been properly installed. Please consult the readme.txt file for installation instructions***";

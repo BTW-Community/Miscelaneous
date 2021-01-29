@@ -26,6 +26,9 @@ To uninstall: Simply copy your save to a pure BTW Minecraft instalation. All blo
 <details>
 <summary>Click to view</summary>
 
+### - Version 3.2f Starry Expanse
+Fixed issue with hardcoreday command
+
 ### - Version 3.2e Starry Expanse
 Updated addon compatibility with BTW Version 4.B0000003
 Fixed issue with client/server code that was causing bugs with villager trades

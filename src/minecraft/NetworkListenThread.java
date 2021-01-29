@@ -32,11 +32,6 @@ public abstract class NetworkListenThread
     
     private void initJorgesMiscPlayers(NetServerHandler par1NetServerHandler) {
         JBJorgesMiscellaneous.sendJBMiscTest(par1NetServerHandler.playerEntity);
-
-		if (this.mcServer.getCommandManager() != null && this.mcServer.getCommandManager() instanceof ServerCommandManager) {
-			JBCommandServerHardcoreDay jbCommandServerHardcoreDay = new JBCommandServerHardcoreDay();
-			((ServerCommandManager)MinecraftServer.getServer().getCommandManager()).registerCommand(new JBCommandServerHardcoreDay());
-		}
     }
 
     public void stopListening()
